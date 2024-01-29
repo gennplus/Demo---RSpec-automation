@@ -15,11 +15,11 @@ class SearchResultAssertions
     if is_all_keywords_in_attribute(keywords, search_result.url) ||
        is_all_keywords_in_attribute(keywords, search_result.title) ||
        is_all_keywords_in_attribute(keywords, search_result.description)
-      puts "Result ""#{search_result.title}"" has all keywords (#{keywords.inspect}) from query"
+      puts "Result \"#{search_result.title}\" has all keywords (#{keywords.inspect}) from query"
       return true
     end
 
-    puts "Result ""#{search_result.title}"" none of the attributes has all keywords (#{keywords.inspect}) from query"
+    puts "Result \"#{search_result.title}\" none of the attributes has all keywords (#{keywords.inspect}) from query"
     return false
   end
 

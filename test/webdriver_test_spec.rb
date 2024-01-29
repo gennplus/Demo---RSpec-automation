@@ -22,27 +22,29 @@ RSpec.describe 'WebdriverTest' do
   it 'should open browser and navigate to google.com and search for something' do
     query = config[:query] || "something"
 
-    # DdgQueryPage.new(@driver)
-    #   .open_page
-    #   .search(query)
-    #
-    # results = DdgResultPage.new(@driver)
-    #   .get_first_ten_results
+    DdgQueryPage.new(@driver)
+      .open_page
+      .search(query)
+
+    ddg_results = DdgResultPage.new(@driver)
+      .get_first_ten_results
+
+    StringUtils.print_search_engine_section(@driver.title) {
+      ddg_results.each { |search_result| SearchResultAssertions
+        .assert_has_keywords(search_result, StringUtils.split_into_words(query)) }
+    }
 
     GoogleQueryPage.new(@driver)
       .open_page
       .search(query)
 
-    results = GoogleResultPage.new(@driver)
+    google_results = GoogleResultPage.new(@driver)
       .get_first_ten_results
 
-    results.each { |search_result| SearchResultAssertions
-      .assert_has_keywords(search_result, StringUtils.split_into_words(query)) }
-
-    # Temporary code
-    sleep 2
-
-    puts "Browser window name is ""#{@driver.title}"""
+    StringUtils.print_search_engine_section(@driver.title) {
+      google_results.each { |search_result| SearchResultAssertions
+        .assert_has_keywords(search_result, StringUtils.split_into_words(query)) }
+    }
   end
 
   after(:each) do

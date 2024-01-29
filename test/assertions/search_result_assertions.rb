@@ -15,10 +15,11 @@ class SearchResultAssertions
     if is_all_keywords_in_attribute(keywords, search_result.url) ||
        is_all_keywords_in_attribute(keywords, search_result.title) ||
        is_all_keywords_in_attribute(keywords, search_result.description)
-      puts "Result #{search_result.title} has all keywords (#{keywords.inspect}) from query"
+      puts "Result ""#{search_result.title}"" has all keywords (#{keywords.inspect}) from query"
       return true
     end
 
+    puts "Result ""#{search_result.title}"" none of the attributes has all keywords (#{keywords.inspect}) from query"
     return false
   end
 
@@ -36,24 +37,9 @@ class SearchResultAssertions
   end
 
   def self.is_all_keywords_in_attribute(keywords, attribute_value)
-    # result = false
-    # keywords.each do |keyword|
-    #   if attribute_value.include?(keyword)
-    #     print keyword + "\n"
-    #   end
-    # end
-
     lowercase_attribute_value = attribute_value.downcase
     lowercase_keywords = keywords.map(&:downcase)
     return lowercase_keywords.all? {
-      |keyword| lowercase_attribute_value.include?(keyword)
-    }
-  end
-
-  def self.is_any_keywords_in_attribute(keywords, attribute_value)
-    lowercase_attribute_value = attribute_value.downcase
-    lowercase_keywords = keywords.map(&:downcase)
-    return lowercase_keywords.any? {
       |keyword| lowercase_attribute_value.include?(keyword)
     }
   end

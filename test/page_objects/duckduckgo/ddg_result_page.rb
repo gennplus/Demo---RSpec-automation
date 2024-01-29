@@ -7,10 +7,10 @@ class DdgResultPage < BasePage
 
   RESULT_DETAILS_CSS = {
     block: "article",
-    url: "li:nth-of-type(%d) article a[data-testid=result-extras-url-link]",
-    title: "li:nth-of-type(%d) article h2",
-    description: "li:nth-of-type(%d) article div[data-result=snippet]",
-    footer: "#more-results"
+    url: "a[data-testid=result-extras-url-link]",
+    title: "h2",
+    description: "div[data-result=snippet]",
+    footer: "#more-results" # plays a role of indicator that search results are on the page
   }
 
   def get_first_ten_results

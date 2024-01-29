@@ -10,14 +10,21 @@ module ResultPage
     result_elements = driver.find_elements(css: css_map[:block])
 
     results = []
-    result_elements.each_with_index { |res, index| results << SearchResult.new(
-      # res.find_element(css:... throws Stale Element Exception
-      # So I use driver directly with specific locators
-      driver.find_element(css: css_map[:url] % [index + 1]).attribute("href"),
-      driver.find_element(css: css_map[:title] % [index + 1]).text,
-      driver.find_element(css: css_map[:description] % [index + 1]).text)
+    result_elements.each_with_index { |res| results << SearchResult.new(
+      get_attribute_or_text(res.find_element(css: css_map[:url]), "href"),
+      res.find_element(css: css_map[:title]).text,
+      res.find_element(css: css_map[:description]).text)
     }
 
     results
+  end
+
+  private
+  def get_attribute_or_text(element, attr)
+    attribute_value = element.attribute(attr)
+    if attribute_value.nil? || attribute_value.empty?
+      return element.text
+    end
+    return attribute_value
   end
 end

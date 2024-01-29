@@ -5,6 +5,8 @@ require 'selenium-webdriver'
 require 'yaml'
 require_relative './page_objects/duckduckgo/ddg_query_page'
 require_relative './page_objects/duckduckgo/ddg_result_page'
+require_relative './page_objects/google/google_query_page'
+require_relative './page_objects/google/google_result_page'
 require_relative './assertions/search_result_assertions'
 require_relative './utils/string_utils'
 
@@ -20,11 +22,18 @@ RSpec.describe 'WebdriverTest' do
   it 'should open browser and navigate to google.com and search for something' do
     query = config[:query] || "something"
 
-    DdgQueryPage.new(@driver)
+    # DdgQueryPage.new(@driver)
+    #   .open_page
+    #   .search(query)
+    #
+    # results = DdgResultPage.new(@driver)
+    #   .get_first_ten_results
+
+    GoogleQueryPage.new(@driver)
       .open_page
       .search(query)
 
-    results = DdgResultPage.new(@driver)
+    results = GoogleResultPage.new(@driver)
       .get_first_ten_results
 
     results.each { |search_result| SearchResultAssertions

@@ -45,6 +45,11 @@ RSpec.describe 'WebdriverTest' do
       google_results.each { |search_result| SearchResultAssertions
         .assert_has_keywords(search_result, StringUtils.split_into_words(query)) }
     }
+
+    popular_results = ddg_results & google_results
+    StringUtils.print_common_results_section {
+      StringUtils.print_titles(popular_results)
+    }
   end
 
   after(:each) do

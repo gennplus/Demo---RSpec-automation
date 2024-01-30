@@ -6,6 +6,7 @@ class BasePage
   end
 
   def open_page(locator)
+    puts "  * Open #{locator} page"
     @driver.navigate.to locator
     self
   end

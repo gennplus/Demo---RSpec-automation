@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SearchResult
-  attr_accessor :url, :title, :description
+  attr_reader :url, :title, :description
 
   def initialize(url, title, description)
     @url = url
@@ -24,4 +24,12 @@ class SearchResult
   def eql?(other)
     self == other
   end
+
+  # return myself as hash of {"fields", "values"}
+  def to_hash
+    hash = {}
+    instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    hash
+  end
+
 end

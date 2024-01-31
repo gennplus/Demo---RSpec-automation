@@ -3,6 +3,11 @@
 require_relative '../model/search_result'
 
 module ResultPage
+
+  # @abstract method works with abstract result page, it grabs first ten results.
+  # @param [WebDriver] driver - initialized Selenium WebDriver
+  # @param [Hash] css_map - hashmap of css locators for page elements
+  # @return [SearchResult] - populated model object
   def get_first_ten_results(driver, css_map)
     wait = Selenium::WebDriver::Wait.new
     wait.until { driver.find_element(css: css_map[:footer]).displayed? }

@@ -1,12 +1,18 @@
 # frozen_string_literal: true
 require_relative '../model/search_result'
 class StringUtils
+
+  # @abstract method split string into words clean from punctuation characters, keeps numbers.
+  # @example "abc, def. 123" -> ["abc", "def", 123]
+  # @param [String] string - string to process
+  # @return [Array of Strings]
   def self.split_into_words(string)
     return string.scan(/\b\w+\b/)
   end
 
   # @abstract method prints to console attributes and their matches
-  # @param [Hash<[Array<String>=[field, value]], [Array<String>]>] a hash with array of strings as key and value
+  # @param [Hash<[Array<String>=[field, value]], [Array<String>]>] attributes_with_matches -
+  #        a hash with array of strings as key and value
   # @return nothing, only puts
   def self.print_attributes_and_match_words(attributes_with_matches)
     attributes_with_matches.each do |attribute, matches|
@@ -15,7 +21,7 @@ class StringUtils
   end
 
   # @abstract method prints to console attributes
-  # @param [Hash<[Array<String>], [Array<String>]>] a hash with array of strings as key and value
+  # @param [SearchResult] search_result - populated search result object
   # @return nothing, only puts
   def self.print_attributes(search_result)
     search_result.to_hash.each do |attribute, value|
@@ -24,7 +30,7 @@ class StringUtils
   end
 
   # @abstract decorator for attributes
-  # @param a search_result object
+  # @param [SearchResult] result - populated search result object
   # @return nothing, only puts
   def self.print_search_result_section(result)
       puts ""
@@ -36,9 +42,9 @@ class StringUtils
   end
 
   # @abstract method prints to console summary for one search result
-  # @param result_title [String] - title of search result
-  # @param keywords [Array<String>] - query spited by words
-  # @param has_all_keywords [Boolean] - true if all words from query are in result
+  # @param [String] result_title - title of search result
+  # @param [Array<String>] keywords - query spited by words
+  # @param [Boolean] has_all_keywords - true if all words from query are in result
   # @return nothing, only puts
   def self.print_search_result_summary(result_title, keywords, has_all_keywords)
     if has_all_keywords
@@ -49,7 +55,7 @@ class StringUtils
   end
 
   # @abstract decorator for search engine, prints a frame
-  # @param [String] search engine page name
+  # @param [String] search_engine - search engine page name
   # @return nothing, only puts
   def self.print_search_engine_section(search_engine)
     puts ""
@@ -62,7 +68,6 @@ class StringUtils
   end
 
   # @abstract decorator for common results, prints a frame
-  # @param nothing
   # @return nothing, only puts
   def self.print_common_results_section
     puts ""
@@ -76,7 +81,7 @@ class StringUtils
   end
 
   # @abstract method prints title of search results
-  # @param [Array<SearchResult>] search results
+  # @param [Array<SearchResult>] search_results - populated search result object
   # @return nothing, only puts
   def self.print_titles(search_results)
     puts search_results.map(&:title)

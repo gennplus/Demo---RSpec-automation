@@ -2,6 +2,12 @@
 
 require_relative '../model/search_result'
 class SearchResultAssertions
+
+  # @abstract method maps attributes of result and keywords that are in attribute's values.
+  # @param [SearchResult] - populated model object
+  # @param [Array<String>] keywords - array of search query keywords
+  # @return [Hash<[Array<String>=[field, value]], [Array<String>=[keywords...]]>]
+  #   Hash of attributes(key and value incl.) and keywords
   def self.get_attributes_and_their_keywords(search_result, keywords)
     assertion_result = {}
     search_result.to_hash.each {
@@ -10,6 +16,11 @@ class SearchResultAssertions
     return assertion_result
   end
 
+  # @abstract method returns true if value of one of attribute has all keywords
+  #   else returns false.
+  # @param [SearchResult] - populated model object
+  # @param [Array<String>] keywords - array of search query keywords
+  # @return [Boolean]
   def self.assert_at_least_one_attribute_has_all_keywords(search_result, keywords)
     result = false
     search_result.to_hash.each {

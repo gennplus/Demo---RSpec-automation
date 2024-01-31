@@ -5,9 +5,12 @@ class BasePage
     @driver = driver
   end
 
-  def open_page(locator)
-    puts "  * Open #{locator} page"
-    @driver.navigate.to locator
+  # @abstract base method opens web page in the browser,
+  # @param [String] url - web page URL
+  # @return itself for chain invocation sake
+  def open_page(url)
+    puts "  * Open #{url} page"
+    @driver.navigate.to url
     self
   end
 end

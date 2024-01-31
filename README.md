@@ -13,11 +13,14 @@ Last part is a comparison of results from two browsers by title and printing com
 * I tried to follow programming principles like SOLID, DRY, KISS, YAGNI.
 * Page objects are structured so `specific page` inherits `base page`, abstract/common query and result pages are modules that mixed to `specific pages`
 * Print out logic is separated from analysis. Methods that print frames are decorators like.
+* Comments are added in RDoc fashion, I stick to the idea the code should be written in a self expandable way. Hope it is.
 * You can see the history of development in commits on the `master` branch. I did **not** used `feature` branches as I usually do on my daily tasks for sake of simplicity and lack of necessity.
 
 ## Running
 * (optional) open `config/test_params.yml` and put the browser of your choice and search query. By default it's a `Firefox` and `Ruby language` respectively.
 * Run in console `rspec .\test\webdriver_test_spec.rb` from the application folder.
+* After Duckduckgo is done you have 5 seconds to click on Google's `cookies agreement` before starting to work with Google search engine.
+* Please note that search engines may be sensitive to your OS settings, internalization, and your physical geo position, so results could be very different from the example below.
 
 ## Reading log
 "*" - these are instructions for manual testers. It's spread across the log.
